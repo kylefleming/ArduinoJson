@@ -69,6 +69,20 @@ class JsonObjectSubscript
     return _object.is<TValue>(_key);
   }
 
+  // Creates and adds a JsonArray.
+  //
+  // JsonArray& createNestedArray();
+  JsonArray& createNestedArray() {
+    return _object.createNestedArray(_key);
+  }
+
+  // Creates and adds a JsonObject.
+  //
+  // JsonObject& createNestedObject();
+  JsonObject& createNestedObject() {
+    return _object.createNestedObject(_key);
+  }
+
   // Sets the specified value.
   //
   // bool set(TValue);

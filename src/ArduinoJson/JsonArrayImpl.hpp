@@ -20,10 +20,24 @@ inline JsonArray &JsonArray::createNestedArray() {
   return array;
 }
 
+inline JsonArray &JsonArray::createNestedArray(size_t index) {
+  if (!_buffer) return JsonArray::invalid();
+  JsonArray &array = _buffer->createArray();
+  set(index, array);
+  return array;
+}
+
 inline JsonObject &JsonArray::createNestedObject() {
   if (!_buffer) return JsonObject::invalid();
   JsonObject &object = _buffer->createObject();
   add(object);
+  return object;
+}
+
+inline JsonObject &JsonArray::createNestedObject(size_t index) {
+  if (!_buffer) return JsonObject::invalid();
+  JsonObject &object = _buffer->createObject();
+  set(index, object);
   return object;
 }
 }

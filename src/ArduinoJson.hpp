@@ -10,6 +10,7 @@
 #include "ArduinoJson/DynamicJsonBuffer.hpp"
 #include "ArduinoJson/JsonArray.hpp"
 #include "ArduinoJson/JsonObject.hpp"
+#include "ArduinoJson/JsonNull.hpp"
 #include "ArduinoJson/JsonVariantComparisons.hpp"
 #include "ArduinoJson/StaticJsonBuffer.hpp"
 

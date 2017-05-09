@@ -50,6 +50,14 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
     return _index < _array.size();
   }
 
+  bool ensure_allocated() const {
+    while (!success()) {
+      JsonArray::iterator it = _array.Internals::List<JsonVariant>::add();
+      if (it == _array.end()) return false;
+    }
+    return true;
+  }
+
   template <typename T>
   FORCE_INLINE typename Internals::JsonVariantAs<T>::type as() const {
     return _array.get<T>(_index);
@@ -58,6 +66,20 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
   template <typename T>
   FORCE_INLINE bool is() const {
     return _array.is<T>(_index);
+  }
+
+  // Creates and sets a JsonArray.
+  //
+  // JsonArray& createNestedArray();
+  JsonArray& createNestedArray() {
+    return _array.createNestedArray(_index);
+  }
+
+  // Creates and sets a JsonObject.
+  //
+  // JsonObject& createNestedObject();
+  JsonObject& createNestedObject() {
+    return _array.createNestedObject(_index);
   }
 
   // Replaces the value

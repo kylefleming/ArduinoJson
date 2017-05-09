@@ -31,6 +31,7 @@ namespace ArduinoJson {
 // Forward declarations.
 class JsonArray;
 class JsonObject;
+class JsonNull;
 
 // A variant that can be a any value serializable to a JSON value.
 //
@@ -306,6 +307,17 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
   is() const {
     return variantIsObject();
   }
+  // bool is<JsonNull>() const
+  template <typename T>
+  typename TypeTraits::EnableIf<
+      TypeTraits::IsSame<
+          typename TypeTraits::RemoveConst<
+              typename TypeTraits::RemoveReference<T>::type>::type,
+          JsonNull>::value,
+      bool>::type
+  is() const {
+    return variantIsNull();
+  }
 
   // Returns true if the variant has a value
   bool success() const {
@@ -333,6 +345,10 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
     return _type == Internals::JSON_STRING ||
            (_type == Internals::JSON_UNPARSED && _content.asString &&
             !strcmp("null", _content.asString));
+  }
+  bool variantIsNull() const {
+    return _type == Internals::JSON_UNPARSED && _content.asString &&
+            !strcmp("null", _content.asString);
   }
 
   // The current type of the variant

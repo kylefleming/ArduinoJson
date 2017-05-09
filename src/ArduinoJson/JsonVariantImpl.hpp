@@ -11,6 +11,7 @@
 #include "JsonArray.hpp"
 #include "JsonObject.hpp"
 #include "JsonVariant.hpp"
+#include "JsonNull.hpp"
 #include "Polyfills/isFloat.hpp"
 #include "Polyfills/isInteger.hpp"
 #include "Polyfills/parseFloat.hpp"
